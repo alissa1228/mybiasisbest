@@ -15,8 +15,8 @@ def homework():
     return render_template('index.html')
 
 
-# 주문하기(POST) API
-@app.route('/order', methods=['POST'])
+# 메모하기(POST) API
+@app.route('/ToDoList', methods=['POST'])
 def save_order():
     name_receive = request.form['name_give']
     phone_receive = request.form['phone_give']
@@ -38,11 +38,11 @@ def save_order():
     return jsonify({'msg': '완료되었습니다!'})
 
 
-# 주문 목록보기(Read) API
-@app.route('/order', methods=['GET'])
+# 목록보기(Read) API
+@app.route('/ToDoList', methods=['GET'])
 def view_orders():
-    order_list = list(db.onlineMall.find({}, {'_id': False}))
-    return jsonify({'order_list': order_list})
+    todo_list = list(db.onlineMall.find({}, {'_id': False}))
+    return jsonify({'todo_list': todo_list})
 
 
 if __name__ == '__main__':
