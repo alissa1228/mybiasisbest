@@ -50,17 +50,13 @@
                 url: "/ToDoList",
                 data: {},
                 success: function (response) {
-                    let order_list = response['todo_list'];
-                    for (let i = 0; i < order_list.length; i++) {
+                    let todo_list = response['todo_list'];
+                    for (let i = 0; i < todo_list.length; i++) {
                         let num = i + 1
-                        let name = order_list[i].name;
-                        let phone = order_list[i].phone;
-                        let amount = order_list[i].amount;
+                        let memo = todo_list[i].memo;
 
-                        let temp_html = `<tr><th scope="row">${num}</th><td>${name}</td>
- <td>${amount}</td><td>${phone}</td></tr>`
-                        $('#table-data').append(temp_html);
-
+                        let temp_html = `<div><p>${num}</p><p>${memo}</p></div>`
+                        $('#memo-data').append(temp_html);
 
                     }
                 }
@@ -69,12 +65,8 @@
 
         function memo() {
             // 메모하기 API 연결
-            let name = $('#submit-name').val();
-            let phone = $('#submit-phone').val();
-            let amount = $('#submit-amount').val();
-            let address = $('#submit-address').val();
-            let address2 = $('#submit-address2').val();
-            let post = $('#submit-post').val();
+            let submitMemo = $('#submit-memo').val();
+
 
             $.ajax({
                 type: "POST",
@@ -129,7 +121,7 @@
     <div>
         <div class="box mt-5">
             <form>
-            <input id="submit-name" type="name"
+            <input id="submit-memo" type="name"
                 placeholder="할 일을 적어주세요"/>
                 <button type="submit" value="Submit"
                 onclick="memo()">Submit</button>
@@ -139,15 +131,16 @@
     <div>
         <div class="box mt-3" onclick=toggle() style="cursor: pointer;">
             <h4><span>📄 클릭하면 리스트가 닫힙니다.</span></h4>
-            <span>문의사항은 'alissacoding@gmail.com' 으로 주세요.</span>
-        </div>
-
-        <div>
-            <div class="toggle box mt-3">메모들 있는 자리</div>
+            <div id="#memo-data" class="toggle mt-3">
+                메모 오는 자리
+            </div>
         </div>
     </div> 
 </div>
 
+<footer>
+    <div class=" box mt-3"><span>문의사항은 'alissacoding@gmail.com' 으로 주세요.</span></div>
+</footer>
 </div>
 </div>
 </body>
