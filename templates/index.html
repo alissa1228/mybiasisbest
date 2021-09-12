@@ -22,29 +22,16 @@
             crossorigin="anonymous"></script>
 
     <title>MEMO</title>
-    <meta property="og:title" content="To DO List"/>
+    <meta property="og:title" content="To Do List"/>
     <meta property="og:description" content="오늘 할 일을 적어보세요!"/>
     <!-- <meta property="og:image" content="{{ url_for('static', filename='product.jpeg') }}"/> -->
 
 
     <script>
-        $(document).ready(function () {
-            // cash()
-            // $.ajax({
-            //     type: "GET",
-            //     url: "https://api.manana.kr/exchange/rate.json",
-            //     data: {},
-            //     success: function (response) {
-            //         let nowRate = response[1]['rate'];
-            //         $('#rate-box').text(nowRate);
-            //     }
-            // })
-            memo_listing();
-        });
 
         function memo_listing() {
-
-            // 목록 보기 API 연결
+           
+            //목록 보기 API 연결
             $.ajax({
                 type: "GET",
                 url: "/ToDoList",
@@ -52,10 +39,11 @@
                 success: function (response) {
                     let todo_list = response['todo_list'];
                     for (let i = 0; i < todo_list.length; i++) {
-                        let num = i + 1
+                        //let num = i + 1
                         let memo = todo_list[i].memo;
 
-                        let temp_html = `<div><p>${num}</p><p>${memo}</p></div>`
+                        let temp_html = `<div><p>${memo}</p></div>`
+
                         $('#memo-data').append(temp_html);
 
                     }
@@ -66,38 +54,18 @@
         function memo() {
             // 메모하기 API 연결
             let submitMemo = $('#submit-memo').val();
-
-
+            
             $.ajax({
                 type: "POST",
                 url: "/ToDoList",
                 data: {
-                    name_give: name,
-                    phone_give: phone,
-                    amount_give: amount,
-                    address_give: address,
-                    address2_give: address2,
-                    post_give: post
+                    memo_give: submitMemo,
                 },
                 success: function (response) { // 성공하면
                     alert(response["msg"]);
                 }
             })
         }
-
-        // function cash() {
-        //     $.ajax({
-        //         type: "GET",
-        //         url: "http://spartacodingclub.shop/sparta_api/rate",
-        //         data: {},
-        //         success: function (response) {
-        //             let exchange = response.rate;
-        //             let temp_html = `<p class="bold mt-3">📌 달러•원 환율 : ${exchange}</p>`
-        //             $('#exchange').append(temp_html);
-        //         }
-        //     })
-
-        // }
 
         function toggle() {
             let status = $('.toggle').css('display');
@@ -130,7 +98,7 @@
         <div class="box mt-3" onclick=toggle() style="cursor: pointer;">
             <h4><span>📌 할 일 (Click!)</span></h4>
             <div id="#memo-data" class="toggle mt-3">
-                 메모 오는 자리
+                 
             </div>
         </div>
     </div> 

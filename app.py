@@ -4,8 +4,8 @@ app = Flask(__name__)
 
 from pymongo import MongoClient
 
-client = MongoClient('mongodb://test:test@localhost', 27017)
-# client = MongoClient('localhost', 27017)
+# client = MongoClient('mongodb://test:test@localhost', 27017)
+client = MongoClient('localhost', 27017)
 db = client.dbhomework
 
 
@@ -17,12 +17,11 @@ def homework():
 
 # 메모하기(POST) API
 @app.route('/ToDoList', methods=['POST'])
-def save_order():
+def save_memo():
     memo_receive = request.form['memo_give']
 
-
     doc = {
-        'name': memo_receive,
+        'memo_receive': memo_receive,
     }
 
     db.memoList.insert_one(doc)
@@ -31,7 +30,7 @@ def save_order():
 
 # 목록보기(Read) API
 @app.route('/ToDoList', methods=['GET'])
-def view_orders():
+def view_memos():
     todo_list = list(db.memoList.find({}, {'_id': False}))
     return jsonify({'todo_list': todo_list})
 
