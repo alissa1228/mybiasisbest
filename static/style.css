@@ -1,17 +1,21 @@
 * {
-    font-family: 'Noto Serif KR', serif;
+    font-family: 'IBM Plex Sans KR', sans-serif;
     word-break: break-word;
     margin: 0;   
 }
 
 .mainContainer {
-    background-color: #FEE4A9; 
+    /* background-color: #FEE4A9;  */
+    /* background-color: #41D7CC; */
+    background-color: #F6F3FA;
     height: 100vh;
     padding: 30px 0;
 }
 
 #header {
-    background-color : #030303;
+    /* background-color : #030303; */
+    /* background-color: #98EAF0; */
+    background-color: #355399;
     height: 70px;
     color : #fff;
     display: flex;
@@ -32,6 +36,7 @@
 .memo-flex {
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 .product {
@@ -42,9 +47,9 @@
     font-weight: 600;
 }
 
-.toggle {
+/* .toggle {
     display: block;
-}
+} */
 
 .mt-3 {
     margin-top : 30px;
@@ -81,7 +86,7 @@
 }
 
 .memo-box {
-    border-bottom : 1px solid #505050;
+    /*border-bottom : 1px solid #505050;*/
     margin-bottom : 10px;
     padding: 5px;
 }
@@ -92,7 +97,7 @@
 }
 
 #footer {
-    background-color: #FEE4A9;
-    text-align: center;
-    padding-bottom : 10px;
+    background-color: #F16A85;
+    color : #fff;
+    padding: 5px;
 }
