@@ -6,9 +6,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../static/style.css"/>
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -20,98 +21,54 @@
             integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
             crossorigin="anonymous"></script>
 
-    <title>스파르타코딩클럽 | 부트스트랩 연습하기</title>
-    <meta property="og:title" content="원페이지쇼핑몰"/>
-    <meta property="og:description" content="스파르타코딩 과제로 만든 원페이지 쇼핑몰 입니다."/>
-    <meta property="og:image" content="{{ url_for('static', filename='product.jpeg') }}"/>
-    <style>
-        * {
-            font-family: 'Noto Serif KR', serif;
-            word-break: break-word;
-        }
+    <title>MEMO</title>
+    <meta property="og:title" content="To Do List"/>
+    <meta property="og:description" content="오늘 할 일을 적어보세요!"/>
+    <!-- <meta property="og:image" content="{{ url_for('static', filename='product.jpeg') }}"/> -->
 
-        .box {
-            width: 70%;
-            /*margin: 30px auto;*/
-            margin: 0 auto;
-            background-color: #fff;
-            border: 1px solid gray;
-            border-radius: 5px;
-            padding: 20px;
-        }
-
-        .product {
-            width: 100%;
-        }
-
-        .bold {
-            font-weight: 600;
-        }
-
-        .toggle {
-            display: none;
-        }
-    </style>
 
     <script>
-        $(document).ready(function () {
-            cash()
+        $(document).ready(function(){
+            memo_listing();
+        })
+
+        function memo_listing() {
+    
+            //목록 보기 API 연결
             $.ajax({
                 type: "GET",
-                url: "https://api.manana.kr/exchange/rate.json",
+                url: "/todo",
                 data: {},
                 success: function (response) {
-                    let nowRate = response[1]['rate'];
-                    $('#rate-box').text(nowRate);
-                }
-            })
-            order_listing();
-        });
-
-        function order_listing() {
-
-            // 주문목록 보기 API 연결
-            $.ajax({
-                type: "GET",
-                url: "/order",
-                data: {},
-                success: function (response) {
-                    let order_list = response['order_list'];
-                    for (let i = 0; i < order_list.length; i++) {
-                        let num = i + 1
-                        let name = order_list[i].name;
-                        let phone = order_list[i].phone;
-                        let amount = order_list[i].amount;
-
-                        let temp_html = `<tr><th scope="row">${num}</th><td>${name}</td>
- <td>${amount}</td><td>${phone}</td></tr>`
-                        $('#table-data').append(temp_html);
-
-
+                    console.log(response)
+                    let todo_list = response['todo_list'];
+                    for (let i = 0; i < todo_list.length; i++) {
+                        // let num = i + 1
+                        let memo = todo_list[i].memo_receive;
+                        let temp_html = 
+                        `<div class="memo-box form-flex">
+                            <div>
+                                <p>${memo}</p>
+                            </div>
+                            <div>
+                                <span onclick="modifyMemo()">수정</span><span style="margin-left: 8px">삭제</span>
+                                </div>
+                        </div>`
+                        $('#memo-data').append(temp_html);
                     }
                 }
             })
         }
 
-        function order() {
-            // 주문하기 API 연결
-            let name = $('#submit-name').val();
-            let phone = $('#submit-phone').val();
-            let amount = $('#submit-amount').val();
-            let address = $('#submit-address').val();
-            let address2 = $('#submit-address2').val();
-            let post = $('#submit-post').val();
-
+        function memo() {
+            // 메모하기 API 연결
+            let submitMemo = $('#submit-memo').val();
+            
             $.ajax({
                 type: "POST",
-                url: "/order",
+                url: "/todo",
                 data: {
-                    name_give: name,
-                    phone_give: phone,
-                    amount_give: amount,
-                    address_give: address,
-                    address2_give: address2,
-                    post_give: post
+                    memo_give: submitMemo,
                 },
                 success: function (response) { // 성공하면
                     alert(response["msg"]);
@@ -119,129 +76,57 @@
             })
         }
 
-        function cash() {
+        function modifyMemo(){
             $.ajax({
-                type: "GET",
-                url: "http://spartacodingclub.shop/sparta_api/rate",
-                data: {},
+                type: "PUT",
+                url: "/ToDoList",
+                data: {
+
+                },
                 success: function (response) {
-                    let exchange = response.rate;
-                    let temp_html = `<p class="bold mt-3">📌 달러•원 환율 : ${exchange}</p>`
-                    $('#exchange').append(temp_html);
+                    let todo_list = response['todo_list'];
                 }
             })
-
         }
 
-        function toggle() {
-            let status = $('.toggle').css('display');
-            if (status == 'block') {
-                $('.toggle').hide();
-            } else {
-                $('.toggle').show();
-            }
-        }
+        // function toggle() {
+        //     let status = $('.toggle').css('display');
+        //     if (status == 'block') {
+        //         $('.toggle').hide();
+        //     } else {
+        //         $('.toggle').show();
+        //     }
+        // }
     </script>
 </head>
 
 <body>
 <!-- As a heading -->
-<div class="pos-f-t">
-    <div class="collapse" id="navbarToggleExternalContent">
-        <div class="bg-dark p-4">
-            <h4 class="text-white">독일산 아로마 오일</h4>
-            <span class="text-muted">7.3 입고 예정</span>
-        </div>
+<header id="header">
+    <div class="smallBox">
+        <h2> &lt; &lt;  TO DO LIST &gt; &gt; </h2>
     </div>
-    <nav class="navbar navbar-dark bg-dark">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent"
-                aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-    </nav>
-</div>
-<div style=" background-color: blanchedalmond; padding: 30px 0;">
-    <div class="box text-center">
-        <h3 class="mt-5 font-weight-bold">독일산 아로마 오일(입고 지연)</h3>
-        <p style="color: gray;">7.3 입고 예정</p>
-        <img class="product mt-5" src="../static/product.jpeg" alt="oil"/>
-        <p class="text-justify mt-5">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-            Ipsum
-            has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of
-            type
-            and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap
-            into
-            electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of
-            Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like
-            Aldus
-            PageMaker including versions of Lorem Ipsum.</p>
-        <p id="exchange" class="mt-5">📌 개당 가격 주문 당시 환율 적용</p>
-        <p>📌 2가지 향 세트로 주문 시 리필용(50ml) 증정</p>
-    </div>
-    <div class="box mt-5" onclick=toggle() style="cursor: pointer">
-        <h4><span>📄 주문 정보 입력</span></h4>
-        <span>클릭하면 폼이 열립니다.</span>
-        <span>문의사항은 <a href="#">이쪽</a>으로 주세요.</span>
-    </div>
-    <div class="box mt-3 toggle">
-        <form>
-            <div class="form-group mt-5">
-                <label for="exampleFormControlInput1">이름</label>
-                <input id="submit-name" type="name" class="form-control" id="exampleFormControlInput1"
-                       placeholder="주문자 이름을 작성해주세요">
-            </div>
-            <div class="form-group">
-                <label for="exampleFormControlInput2">전화번호</label>
-                <input id="submit-phone" type="name" class="form-control" id="exampleFormControlInput2"
-                       placeholder="ex) 010 1234 5678">
-            </div>
-            <div class="form-group">
-                <label for="exampleFormControlSelect1">수량</label>
-                <select id="submit-amount" class="form-control" id="exampleFormControlSelect1">
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="inputAddress">주소</label>
-                <input id="submit-address" type="text" class="form-control" id="inputAddress">
-            </div>
-            <div class="form-group">
-                <label for="inputAddress2">세부 주소</label>
-                <input id="submit-address2" type="text" class="form-control" id="inputAddress2">
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-4">
-                    <label for="inputZip">우편번호</label>
-                    <input id="submit-post" type="text" class="form-control" id="inputZip">
-                </div>
-            </div>
-            <div class="mt-4">
-                <input id="form-submit" class="btn btn-primary btn-lg btn-block" type="submit" value="Submit"
-                       onclick="order()">
-            </div>
+</header>
+<div class="mainContainer">
+    <div class="box mt-5">
+        <form class="form-flex">
+        <input id="submit-memo" type="text"
+            placeholder="할 일을 적어주세요"/>
+            <button id="submit-button" type="submit" value="Submit"
+            onclick="memo()">확인</button>
         </form>
     </div>
-
-    <table class="table mt-5 box">
-        <thead class="thead-dark">
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">이름</th>
-            <th scope="col">수량</th>
-            <th scope="col">전화번호</th>
-        </tr>
-        </thead>
-        <tbody id="table-data">
-
-        </tbody>
-    </table>
-
+    <div>
+        <div class="box mt-3" onclick=toggle() style="cursor: pointer;">
+            <h4><span>📌 할 일 (Click!)</span></h4>
+            <div id="memo-data" class="toggle mt-3">
+            </div>
+        </div>
+    </div> 
 </div>
-
+<footer id="footer">
+    <div><span>문의사항은 'alissacoding@gmail.com' 으로 주세요.</span></div>
+</footer>
 </div>
 </div>
 </body>
