@@ -16,7 +16,7 @@ def homework():
 
 
 # 메모하기(POST) API
-@app.route('/ToDoList', methods=['POST'])
+@app.route('/todo', methods=['POST'])
 def save_memo():
     memo_receive = request.form['memo_give']
 
@@ -27,9 +27,8 @@ def save_memo():
     db.memoList.insert_one(doc)
     return jsonify({'msg': '완료되었습니다!'})
 
-
 # 목록보기(Read) API
-@app.route('/ToDoList', methods=['GET'])
+@app.route('/todo', methods=['GET'])
 def view_memos():
     todo_list = list(db.memoList.find({}, {'_id': False}))
     return jsonify({'todo_list': todo_list})

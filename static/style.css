@@ -90,3 +90,9 @@
     font-size : 13px;
     color : #505050;
 }
+
+#footer {
+    background-color: #FEE4A9;
+    text-align: center;
+    padding-bottom : 10px;
+}

@@ -37,13 +37,13 @@
             //목록 보기 API 연결
             $.ajax({
                 type: "GET",
-                url: "/ToDoList",
+                url: "/todo",
                 data: {},
                 success: function (response) {
-                    
+                    console.log(response)
                     let todo_list = response['todo_list'];
                     for (let i = 0; i < todo_list.length; i++) {
-                        //let num = i + 1
+                        // let num = i + 1
                         let memo = todo_list[i].memo_receive;
                         let temp_html = 
                         `<div class="memo-box form-flex">
@@ -66,7 +66,7 @@
             
             $.ajax({
                 type: "POST",
-                url: "/ToDoList",
+                url: "/todo",
                 data: {
                     memo_give: submitMemo,
                 },
@@ -77,17 +77,26 @@
         }
 
         function modifyMemo(){
-            
+            $.ajax({
+                type: "PUT",
+                url: "/ToDoList",
+                data: {
+
+                },
+                success: function (response) {
+                    let todo_list = response['todo_list'];
+                }
+            })
         }
 
-        function toggle() {
-            let status = $('.toggle').css('display');
-            if (status == 'block') {
-                $('.toggle').hide();
-            } else {
-                $('.toggle').show();
-            }
-        }
+        // function toggle() {
+        //     let status = $('.toggle').css('display');
+        //     if (status == 'block') {
+        //         $('.toggle').hide();
+        //     } else {
+        //         $('.toggle').show();
+        //     }
+        // }
     </script>
 </head>
 
@@ -115,9 +124,8 @@
         </div>
     </div> 
 </div>
-
-<footer>
-    <div class=" box mt-3"><span>문의사항은 'alissacoding@gmail.com' 으로 주세요.</span></div>
+<footer id="footer">
+    <div><span>문의사항은 'alissacoding@gmail.com' 으로 주세요.</span></div>
 </footer>
 </div>
 </div>
