@@ -21,7 +21,7 @@
             integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
             crossorigin="anonymous"></script>
 
-    <title>MEMO!📌</title>
+    <title>MEMO</title>
     <meta property="og:title" content="To DO List"/>
     <meta property="og:description" content="오늘 할 일을 적어보세요!"/>
     <!-- <meta property="og:image" content="{{ url_for('static', filename='product.jpeg') }}"/> -->
@@ -118,21 +118,19 @@
     </div>
 </header>
 <div class="mainContainer">
-    <div>
-        <div class="box mt-5">
-            <form>
-            <input id="submit-memo" type="name"
-                placeholder="할 일을 적어주세요"/>
-                <button type="submit" value="Submit"
-                onclick="memo()">Submit</button>
-            </form>
-        </div>
+    <div class="box mt-5">
+        <form class="form-flex">
+        <input id="submit-memo" type="name"
+            placeholder="할 일을 적어주세요"/>
+            <button id="submit-button" type="submit" value="Submit"
+            onclick="memo()">확인</button>
+        </form>
     </div>
     <div>
         <div class="box mt-3" onclick=toggle() style="cursor: pointer;">
-            <h4><span>📄 클릭하면 리스트가 닫힙니다.</span></h4>
+            <h4><span>📌 할 일 (Click!)</span></h4>
             <div id="#memo-data" class="toggle mt-3">
-                메모 오는 자리
+                 메모 오는 자리
             </div>
         </div>
     </div> 

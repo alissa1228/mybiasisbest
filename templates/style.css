@@ -5,7 +5,7 @@
 }
 
 .mainContainer {
-    background-color: #1EF17E; 
+    background-color: #FEE4A9; 
     height: 100vh;
     padding: 30px 0;
 }
@@ -24,9 +24,15 @@
     margin: 0 auto;
     background-color: #fff;
     /* border: 1px solid gray; */
-    box-shadow: 10px 10px 10px gray;
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3);
+    /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);*/
     border-radius: 5px;
     padding: 20px;
+}
+
+.memo-flex {
+    display: flex;
+    justify-content: center;
 }
 
 .product {
@@ -43,4 +49,21 @@
 
 .mt-3 {
     margin-top : 30px;
+}
+
+#submit-memo, #submit-button {
+    border : 0
+}
+
+#submit-button{
+    background: none;
+    width: 80px;
+    border: 1px solid gray;
+    border-radius: 15px;
+    padding: 5px;
+}
+
+.form-flex {
+    display: flex;
+    justify-content: space-between;
 }
