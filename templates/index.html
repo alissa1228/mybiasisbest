@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css"/>
+    <link rel="stylesheet" href="../static/style.css"/>
     <!-- Bootstrap CSS -->
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
@@ -39,10 +39,10 @@
             //         $('#rate-box').text(nowRate);
             //     }
             // })
-            order_listing();
+            memo_listing();
         });
 
-        function order_listing() {
+        function memo_listing() {
 
             // 목록 보기 API 연결
             $.ajax({
@@ -120,7 +120,7 @@
 <div class="mainContainer">
     <div class="box mt-5">
         <form class="form-flex">
-        <input id="submit-memo" type="name"
+        <input id="submit-memo" type="text"
             placeholder="할 일을 적어주세요"/>
             <button id="submit-button" type="submit" value="Submit"
             onclick="memo()">확인</button>

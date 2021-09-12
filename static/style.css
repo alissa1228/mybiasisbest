@@ -1,7 +1,7 @@
 * {
     font-family: 'Noto Serif KR', serif;
     word-break: break-word;
-    margin: 0;
+    margin: 0;   
 }
 
 .mainContainer {
@@ -55,12 +55,23 @@
     border : 0
 }
 
+#submit-memo {
+    width: 80%;
+}
+
+#submit-memo:focus {
+    outline: 0;
+    border-bottom: 1px solid gray;
+}
+
+
 #submit-button{
     background: none;
     width: 80px;
     border: 1px solid gray;
     border-radius: 15px;
     padding: 5px;
+    margin-left : 3px;
 }
 
 .form-flex {
