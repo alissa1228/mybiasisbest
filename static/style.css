@@ -86,14 +86,9 @@
 }
 
 .memo-box {
-    /*border-bottom : 1px solid #505050;*/
+    border-bottom : 1px solid #f0f0f0;
     margin-bottom : 10px;
     padding: 5px;
-}
-
-.memo-box > div > span {
-    font-size : 13px;
-    color : #505050;
 }
 
 #footer {

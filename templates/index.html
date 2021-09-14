@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../static/style.css"/>
+    <link rel="icon" href="../static/good_icon.svg"/> 
     <!-- Bootstrap CSS -->
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
@@ -21,7 +22,7 @@
             integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
             crossorigin="anonymous"></script>
 
-    <title>Cheer UP!</title>
+    <title>우리 애 최고^^</title>
     <meta property="og:title" content="To Do List"/>
     <meta property="og:description" content="오늘 할 일을 적어보세요!"/>
     <!-- <meta property="og:image" content="{{ url_for('static', filename='product.jpeg') }}"/> -->
@@ -40,19 +41,15 @@
                 url: "/todo",
                 data: {},
                 success: function (response) {
-                    console.log(response)
                     let todo_list = response['todo_list'];
                     for (let i = 0; i < todo_list.length; i++) {
                         // let num = i + 1
                         let memo = todo_list[i].memo_receive;
                         let temp_html = 
-                        `<div class="memo-box form-flex">
-                            <div>
+                        `<div class="memo-box">
+                            <div class="form-flex">
                                 <p id="memo_id">${memo}</p>
                             </div>
-                            <div>
-                                <span">수정</span><span onclick="removeMemo()" style="margin-left: 8px">삭제</span>
-                                </div>
                         </div>`
                         $('#memo-data').append(temp_html);
                     }
@@ -76,21 +73,6 @@
             })
         }
 
-        function removeMemo(){
-            let remove_memo = $('#submit-memo').val();
-            console.log(remove_memo);
-            $.ajax({
-                type: "DELETE",
-                url: "/todo",
-                data: {
-                    remove_give : remove_memo,
-                },
-                success: function (response) {
-                    alert(response["msg"]);
-                }
-            })
-        }
-
         // function toggle() {
         //     let status = $('.toggle').css('display');
         //     if (status == 'block') {
@@ -106,22 +88,23 @@
 <!-- As a heading -->
 <header id="header">
     <div class="smallBox">
-        <h1> &lt; &lt; ⭐️ Cheer UP! ⭐️  &gt; &gt; </h1>
+        <h1> ⭐️ 최애 자랑 보드 ⭐️ </h1>
     </div>
 </header>
 <div class="mainContainer">
     <div class="box mt-5">
         <form class="form-flex">
         <input id="submit-memo" type="text"
-            placeholder="지금 가장 듣고 싶은 말을 하나씩 해볼까요?"/>
+            placeholder="🌈 주접 떨 준비 되셨나요?"/>
             <button id="submit-button" type="submit" value="Submit"
             onclick="memo()">확인</button>
         </form>
     </div>
     <div>
         <div class="box mt-3" style="cursor: pointer;">
-            <h4><span>✨ 오늘도 힘내봐요! 🌈</span></h4>
+            <h4><span>💖 최애 주접 판 깔았습니다 ✨</span></h4>
             <div id="memo-data" class="mt-3">
+                
             </div>
         </div>
     </div> 

@@ -33,13 +33,6 @@ def view_memos():
     todo_list = list(db.memoList.find({}, {'_id': False}))
     return jsonify({'todo_list': todo_list})
 
-#삭제(Delte) 
-@app.route('/todo', methods=['DELETE'])
-def delete_memos():
-    remove_receive = request.form['remove_give']
-    remove_list = list(db.memoList.find_one(remove_receive))
-    return jsonify({'remove_list': remove_list, 'msg': '완료되었습니다!'})
-
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)
