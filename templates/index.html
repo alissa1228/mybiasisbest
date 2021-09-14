@@ -38,17 +38,18 @@
             //목록 보기 API 연결
             $.ajax({
                 type: "GET",
-                url: "/todo",
+                url: "/todo/list",
                 data: {},
                 success: function (response) {
                     let todo_list = response['todo_list'];
                     for (let i = 0; i < todo_list.length; i++) {
                         // let num = i + 1
-                        let memo = todo_list[i].memo_receive;
+                        let memo = todo_list[i].memo;
                         let temp_html = 
                         `<div class="memo-box">
                             <div class="form-flex">
                                 <p id="memo_id">${memo}</p>
+                                <p class="deleteBtn" onclick="remove_memo('${memo}')">삭제</p>
                             </div>
                         </div>`
                         $('#memo-data').append(temp_html);
@@ -63,12 +64,26 @@
             
             $.ajax({
                 type: "POST",
-                url: "/todo",
+                url: "/todo/memo",
                 data: {
                     memo_give: submitMemo,
                 },
                 success: function (response) { // 성공하면
                     alert(response["msg"]);
+                }
+            })
+        }
+
+        function remove_memo(memo) {
+            $.ajax({
+                type: "POST",
+                url: "/todo/delete",
+                data: {
+                    memo_give: memo,
+                },
+                success: function (response) { // 성공하면
+                    alert(response["msg"]);
+                    window.location.reload()
                 }
             })
         }
@@ -88,7 +103,7 @@
 <!-- As a heading -->
 <header id="header">
     <div class="smallBox">
-        <h1> ⭐️ 최애 자랑 보드 ⭐️ </h1>
+        <h1> &lt;&lt; 최애 자랑 보드 &gt;&gt;</h1>
     </div>
 </header>
 <div class="mainContainer">

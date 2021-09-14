@@ -16,22 +16,30 @@ def homework():
 
 
 # 메모하기(POST) API
-@app.route('/todo', methods=['POST'])
+@app.route('/todo/memo', methods=['POST'])
 def save_memo():
     memo_receive = request.form['memo_give']
 
     doc = {
-        'memo_receive': memo_receive,
+        'memo': memo_receive,
     }
 
     db.memoList.insert_one(doc)
     return jsonify({'msg': '완료되었습니다!'})
 
 # 목록보기(Read) API
-@app.route('/todo', methods=['GET'])
+@app.route('/todo/list', methods=['GET'])
 def view_memos():
     todo_list = list(db.memoList.find({}, {'_id': False}))
     return jsonify({'todo_list': todo_list})
+
+# 삭제하기(delete)
+@app.route('/todo/delete', methods=['POST'])
+def delete_star():
+    memo_receive = request.form['memo_give']
+    db.memoList.delete_one({'memo': memo_receive})
+    return jsonify({'msg': '삭제완료!'})
+
 
 
 if __name__ == '__main__':

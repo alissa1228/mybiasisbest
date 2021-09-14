@@ -91,6 +91,11 @@
     padding: 5px;
 }
 
+.deleteBtn {
+    font-size : 13px;
+    color : #505050;
+}
+
 #footer {
     background-color: #F16A85;
     color : #fff;
