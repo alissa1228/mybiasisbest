@@ -5,8 +5,9 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../static/style.css"/>
+    <link rel="icon" href="../static/good_icon.svg"/> 
     <!-- Bootstrap CSS -->
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
@@ -21,10 +22,10 @@
             integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
             crossorigin="anonymous"></script>
 
-    <title>MEMO</title>
-    <meta property="og:title" content="To Do List"/>
-    <meta property="og:description" content="오늘 할 일을 적어보세요!"/>
-    <!-- <meta property="og:image" content="{{ url_for('static', filename='product.jpeg') }}"/> -->
+    <title>✨ 전국 최애 자랑 ✨</title>
+    <meta property="og:title" content="✨ 전-국 최애 자랑 ✨"/>
+    <meta property="og:description" content="최애 주접 판 깔아놨습니다.!"/>
+    <meta property="og:image" content="{{ url_for('static', filename='banner.png') }}"/>
 
 
     <script>
@@ -40,22 +41,19 @@
                 url: "/todo",
                 data: {},
                 success: function (response) {
-                    console.log(response)
                     let todo_list = response['todo_list'];
                     for (let i = 0; i < todo_list.length; i++) {
                         // let num = i + 1
-                        let memo = todo_list[i].memo_receive;
+                        let memo = todo_list[i].memo;
                         let temp_html = 
-                        `<div class="memo-box form-flex">
-                            <div>
-                                <p>${memo}</p>
+                        `<div class="memo-box">
+                            <div class="form-flex">
+                                <p id="memo_id">${memo}</p>
                             </div>
-                            <div>
-                                <span onclick="modifyMemo()">수정</span><span style="margin-left: 8px">삭제</span>
-                                </div>
                         </div>`
                         $('#memo-data').append(temp_html);
                     }
+                    todo_list.sort();
                 }
             })
         }
@@ -63,7 +61,8 @@
         function memo() {
             // 메모하기 API 연결
             let submitMemo = $('#submit-memo').val();
-            
+            if (confirm("등록하실건가요?")==true){
+        
             $.ajax({
                 type: "POST",
                 url: "/todo",
@@ -74,29 +73,12 @@
                     alert(response["msg"]);
                 }
             })
+            }else {
+                return
+            }
         }
 
-        function modifyMemo(){
-            $.ajax({
-                type: "PUT",
-                url: "/ToDoList",
-                data: {
 
-                },
-                success: function (response) {
-                    let todo_list = response['todo_list'];
-                }
-            })
-        }
-
-        // function toggle() {
-        //     let status = $('.toggle').css('display');
-        //     if (status == 'block') {
-        //         $('.toggle').hide();
-        //     } else {
-        //         $('.toggle').show();
-        //     }
-        // }
     </script>
 </head>
 
@@ -104,29 +86,30 @@
 <!-- As a heading -->
 <header id="header">
     <div class="smallBox">
-        <h2> &lt; &lt;  TO DO LIST &gt; &gt; </h2>
+        <h1>✨ 전-국 최애 자랑 ✨</h1>
     </div>
 </header>
 <div class="mainContainer">
-    <div class="box mt-5">
+    <div class="box font13 mt-3">
+        <p>📌 아이돌,배우,애니,게임 모두 가능!</p>
+        <p>📌 주접은 모두 익명으로 작성됩니다.</p>
+        <p style="margin-bottom : 30px">📌 문의사항은 'alissacoding@gmail.com' 으로 주세요.</p>
         <form class="form-flex">
         <input id="submit-memo" type="text"
-            placeholder="할 일을 적어주세요"/>
+            placeholder="🌈 주접 떨 준비 되셨나요? (~우리 애 최고~)"/>
             <button id="submit-button" type="submit" value="Submit"
             onclick="memo()">확인</button>
         </form>
     </div>
     <div>
-        <div class="box mt-3" onclick=toggle() style="cursor: pointer;">
-            <h4><span>📌 할 일 (Click!)</span></h4>
-            <div id="memo-data" class="toggle mt-3">
+        <div class="box mt-3">
+            <h4><span>💖 최애 주접 판 깔았습니다 ✨</span></h4>
+            <div id="memo-data" class="mt-3">
+                
             </div>
         </div>
     </div> 
 </div>
-<footer id="footer">
-    <div><span>문의사항은 'alissacoding@gmail.com' 으로 주세요.</span></div>
-</footer>
 </div>
 </div>
 </body>

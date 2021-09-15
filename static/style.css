@@ -1,22 +1,43 @@
+/* @font-face { font-family: ‘yangjin’; src: url(‘https://cdn.jsdelivr.net/gh/supernovice-lab/font@0.9/yangjin.woff’) format(‘woff’); font-weight: normal; font-style: normal; } */
+@font-face {
+    font-family: '116watermelon';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.0/116watermelon.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    }
+
 * {
-    font-family: 'Noto Serif KR', serif;
     word-break: break-word;
     margin: 0;   
+     
+}
+
+body {
+    background-image: url('../static/background.jpeg');
 }
 
 .mainContainer {
-    background-color: #FEE4A9; 
+    /* background-color: #F6F3FA; */
+    font-family: 'IBM Plex Sans KR', sans-serif;
     height: 100vh;
     padding: 30px 0;
 }
 
 #header {
-    background-color : #030303;
-    height: 70px;
-    color : #fff;
+    /* background-color: #355399; */
+    background-color : #fff;
+    opacity: 0.8;
+    height: 60px;
     display: flex;
     justify-content: center;
     align-items: center;
+    font-family: '116watermelon';
+}
+
+.smallBox > h1 {
+    background: linear-gradient(to right, #fbcac9, #8ca6ce);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .box {
@@ -32,6 +53,7 @@
 .memo-flex {
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 .product {
@@ -42,9 +64,9 @@
     font-weight: 600;
 }
 
-.toggle {
+/* .toggle {
     display: block;
-}
+} */
 
 .mt-3 {
     margin-top : 30px;
@@ -65,6 +87,9 @@
    
 }
 
+.font13 {
+    font-size : 13px;
+}
 
 #submit-button{
     background: none;
@@ -73,6 +98,7 @@
     border-radius: 15px;
     padding: 5px;
     margin-left : 3px;
+    cursor: pointer;
 }
 
 .form-flex {
@@ -81,18 +107,12 @@
 }
 
 .memo-box {
-    border-bottom : 1px solid #505050;
+    border-bottom : 1px solid #f0f0f0;
     margin-bottom : 10px;
     padding: 5px;
 }
 
-.memo-box > div > span {
+.deleteBtn {
     font-size : 13px;
     color : #505050;
-}
-
-#footer {
-    background-color: #FEE4A9;
-    text-align: center;
-    padding-bottom : 10px;
 }
