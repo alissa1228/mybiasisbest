@@ -61,7 +61,7 @@
         function memo() {
             // 메모하기 API 연결
             let submitMemo = $('#submit-memo').val();
-            
+            confirm("등록하실건가요?");
             $.ajax({
                 type: "POST",
                 url: "/todo/memo",
@@ -74,28 +74,7 @@
             })
         }
 
-        // function remove_memo(memo) {
-        //     $.ajax({
-        //         type: "POST",
-        //         url: "/todo/delete",
-        //         data: {
-        //             memo_give: memo,
-        //         },
-        //         success: function (response) { // 성공하면
-        //             alert(response["msg"]);
-        //             window.location.reload()
-        //         }
-        //     })
-        // }
 
-        // function toggle() {
-        //     let status = $('.toggle').css('display');
-        //     if (status == 'block') {
-        //         $('.toggle').hide();
-        //     } else {
-        //         $('.toggle').show();
-        //     }
-        // }
     </script>
 </head>
 
@@ -127,9 +106,6 @@
         </div>
     </div> 
 </div>
-<!-- <footer id="footer">
-    <div class="memo-flex"><span></span></div>
-</footer> -->
 </div>
 </div>
 </body>

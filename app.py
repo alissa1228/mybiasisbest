@@ -26,7 +26,7 @@ def save_memo():
     }
 
     db.memoList.insert_one(doc)
-    return jsonify({'msg': '완료되었습니다!'})
+    return jsonify({'msg': '완료되었습니다! 수정/삭제 문의는 관리자에게 해주세요.'})
 
 # 목록보기(Read) API
 @app.route('/todo/list', methods=['GET'])
@@ -34,12 +34,12 @@ def view_memos():
     todo_list = list(db.memoList.find({}, {'_id': False}))
     return jsonify({'todo_list': todo_list})
 
-# 삭제하기(delete)
-@app.route('/todo/delete', methods=['POST'])
-def delete_star():
-    memo_receive = request.form['memo_give']
-    db.memoList.delete_one({'memo': memo_receive})
-    return jsonify({'msg': '삭제완료!'})
+# # 삭제하기(delete)
+# @app.route('/todo/delete', methods=['POST'])
+# def delete_star():
+#     memo_receive = request.form['memo_give']
+#     db.memoList.delete_one({'memo': memo_receive})
+#     return jsonify({'msg': '삭제완료!'})
 
 
 
