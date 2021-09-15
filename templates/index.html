@@ -49,11 +49,11 @@
                         `<div class="memo-box">
                             <div class="form-flex">
                                 <p id="memo_id">${memo}</p>
-                                <p class="deleteBtn" onclick="remove_memo('${memo}')">삭제</p>
                             </div>
                         </div>`
                         $('#memo-data').append(temp_html);
                     }
+                    todo_list.sort(-1);
                 }
             })
         }
@@ -74,19 +74,19 @@
             })
         }
 
-        function remove_memo(memo) {
-            $.ajax({
-                type: "POST",
-                url: "/todo/delete",
-                data: {
-                    memo_give: memo,
-                },
-                success: function (response) { // 성공하면
-                    alert(response["msg"]);
-                    window.location.reload()
-                }
-            })
-        }
+        // function remove_memo(memo) {
+        //     $.ajax({
+        //         type: "POST",
+        //         url: "/todo/delete",
+        //         data: {
+        //             memo_give: memo,
+        //         },
+        //         success: function (response) { // 성공하면
+        //             alert(response["msg"]);
+        //             window.location.reload()
+        //         }
+        //     })
+        // }
 
         // function toggle() {
         //     let status = $('.toggle').css('display');
@@ -103,14 +103,17 @@
 <!-- As a heading -->
 <header id="header">
     <div class="smallBox">
-        <h1> &lt;&lt; 전국 최애 자랑 ~우리 애 최고~ &gt;&gt;</h1>
+        <h1> &lt;&lt; 전국 최애 자랑 &gt;&gt;</h1>
     </div>
 </header>
 <div class="mainContainer">
-    <div class="box mt-5">
+    <div class="box font13">
+        <p>📌 아이돌,배우,애니,게임 모두 가능!</p>
+        <p>📌 주접은 모두 익명으로 작성됩니다.</p>
+        <p style="margin-bottom : 10px">📌 문의사항은 'alissacoding@gmail.com' 으로 주세요.</p>
         <form class="form-flex">
         <input id="submit-memo" type="text"
-            placeholder="🌈 주접 떨 준비 되셨나요? (아이돌,배우,애니,게임 모두 가능)"/>
+            placeholder="🌈 주접 떨 준비 되셨나요? (~우리 애 최고~)"/>
             <button id="submit-button" type="submit" value="Submit"
             onclick="memo()">확인</button>
         </form>
@@ -124,9 +127,9 @@
         </div>
     </div> 
 </div>
-<footer id="footer">
-    <div class="memo-flex"><span>문의사항은 'alissacoding@gmail.com' 으로 주세요.</span></div>
-</footer>
+<!-- <footer id="footer">
+    <div class="memo-flex"><span></span></div>
+</footer> -->
 </div>
 </div>
 </body>

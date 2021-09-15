@@ -16,7 +16,7 @@ body {
 }
 
 #header {
-    /* background-color: #355399; */
+    background-color: #355399;
     height: 70px;
     color : #fff;
     display: flex;
@@ -71,6 +71,9 @@ body {
    
 }
 
+.font13 {
+    font-size : 13px;
+}
 
 #submit-button{
     background: none;
@@ -79,6 +82,7 @@ body {
     border-radius: 15px;
     padding: 5px;
     margin-left : 3px;
+    cursor: pointer;
 }
 
 .form-flex {
@@ -95,10 +99,4 @@ body {
 .deleteBtn {
     font-size : 13px;
     color : #505050;
-}
-
-#footer {
-    background-color: #F16A85;
-    color : #fff;
-    padding: 5px;
 }

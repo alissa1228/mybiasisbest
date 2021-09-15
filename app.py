@@ -19,8 +19,9 @@ def homework():
 @app.route('/todo/memo', methods=['POST'])
 def save_memo():
     memo_receive = request.form['memo_give']
-
+    
     doc = {
+
         'memo': memo_receive,
     }
 
