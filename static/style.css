@@ -19,7 +19,7 @@ body {
 .mainContainer {
     /* background-color: #F6F3FA; */
     font-family: 'IBM Plex Sans KR', sans-serif;
-    height: 100vh;
+    height: 100%;
     padding: 30px 0;
 }
 
@@ -107,6 +107,11 @@ body {
 .form-flex {
     display: flex;
     justify-content: space-between;
+}
+
+#memo-data {
+    display: flex;
+    flex-direction: column-reverse;
 }
 
 .memo-box {
