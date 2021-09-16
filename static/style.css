@@ -104,6 +104,12 @@ body {
     cursor: pointer;
 }
 
+#submit-button:hover {
+    border: 0;
+    background-color: #D2E4F9;
+    color : #fff;
+}
+
 .form-flex {
     display: flex;
     justify-content: space-between;

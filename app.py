@@ -6,8 +6,8 @@ from pymongo import MongoClient
 
 import datetime
 
-# client = MongoClient('mongodb://test:test@localhost', 27017)
-client = MongoClient('localhost', 27017)
+client = MongoClient('mongodb://test:test@localhost', 27017)
+# client = MongoClient('localhost', 27017)
 db = client.dbhomework
 
 
@@ -37,15 +37,6 @@ def view_memos():
     todo_list = list(db.memoList.find({}, {'_id': False}))
 
     return jsonify({'todo_list': todo_list})
-
-# # 삭제하기(delete)
-# @app.route('/todo/delete', methods=['POST'])
-# def delete_star():
-#     memo_receive = request.form['memo_give']
-#     db.memoList.delete_one({'memo': memo_receive})
-#     return jsonify({'msg': '삭제완료!'})
-
-
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)
