@@ -79,6 +79,9 @@ body {
 #submit-memo {
     width: 80%;
     border-bottom: 1px solid #f0f0f0;
+    word-break: break-word;
+    resize: none;
+    height: 50px;
     
 }
 
