@@ -21,6 +21,9 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
             integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
             crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="sweetalert2/dist/sweetalert2.all.min.js"></script>
+
 
     <title>✨ 전국 최애 자랑 ✨</title>
     <meta property="og:title" content="✨ 전-국 최애 자랑 ✨"/>
@@ -31,6 +34,7 @@
     <script>
         $(document).ready(function(){
             memo_listing();
+
         })
 
         function memo_listing() {
@@ -38,12 +42,11 @@
             //목록 보기 API 연결
             $.ajax({
                 type: "GET",
-                url: "/todo",
+                url: "/api",
                 data: {},
                 success: function (response) {
                     let todo_list = response['todo_list'];
                     for (let i = 0; i < todo_list.length; i++) {
-                        // let num = i + 1
                         let memo = todo_list[i].memo;
                         let temp_html = 
                         `<div class="memo-box">
@@ -53,7 +56,7 @@
                         </div>`
                         $('#memo-data').append(temp_html);
                     }
-                    todo_list.sort();
+                    
                 }
             })
         }
@@ -61,11 +64,12 @@
         function memo() {
             // 메모하기 API 연결
             let submitMemo = $('#submit-memo').val();
+            
             if (confirm("등록하실건가요?")==true){
         
             $.ajax({
                 type: "POST",
-                url: "/todo",
+                url: "/api",
                 data: {
                     memo_give: submitMemo,
                 },
@@ -73,9 +77,13 @@
                     alert(response["msg"]);
                 }
             })
+
             }else {
                 return
             }
+           
+               
+           
         }
 
 
@@ -93,7 +101,7 @@
     <div class="box font13 mt-3">
         <p>📌 아이돌,배우,애니,게임 모두 가능!</p>
         <p>📌 주접은 모두 익명으로 작성됩니다.</p>
-        <p style="margin-bottom : 30px">📌 문의사항은 'alissacoding@gmail.com' 으로 주세요.</p>
+        <p style="margin-bottom : 30px">📌 수정/삭제 문의사항은 'alissacoding@gmail.com' 으로 주세요.</p>
         <form class="form-flex">
         <textarea id="submit-memo" type="text"
             placeholder="🌈 주접 떨 준비 되셨나요?"></textarea>

@@ -4,8 +4,10 @@ app = Flask(__name__)
 
 from pymongo import MongoClient
 
-client = MongoClient('mongodb://test:test@localhost', 27017)
-# client = MongoClient('localhost', 27017)
+import datetime
+
+# client = MongoClient('mongodb://test:test@localhost', 27017)
+client = MongoClient('localhost', 27017)
 db = client.dbhomework
 
 
@@ -16,22 +18,24 @@ def homework():
 
 
 # 메모하기(POST) API
-@app.route('/todo', methods=['POST'])
+@app.route('/api', methods=['POST'])
 def save_memo():
     memo_receive = request.form['memo_give']
+    date = datetime.datetime.now()
     
     doc = {
-
         'memo': memo_receive,
+        'date': date
     }
 
     db.memoList.insert_one(doc)
-    return jsonify({'msg': '완료되었습니다! 수정/삭제 문의는 관리자에게 해주세요.'})
+    return jsonify({'msg': '완료되었습니다!'})
 
 # 목록보기(Read) API
-@app.route('/todo', methods=['GET'])
+@app.route('/api', methods=['GET'])
 def view_memos():
     todo_list = list(db.memoList.find({}, {'_id': False}))
+
     return jsonify({'todo_list': todo_list})
 
 # # 삭제하기(delete)
