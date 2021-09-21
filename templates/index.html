@@ -20,10 +20,8 @@
             crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
             integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-            crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="sweetalert2/dist/sweetalert2.all.min.js"></script>
-
+            crossorigin="anonymous">
+    </script>
 
     <title>✨ 전국 최애 자랑 ✨</title>
     <meta property="og:title" content="✨ 전-국 최애 자랑 ✨"/>
@@ -42,7 +40,7 @@
             //목록 보기 API 연결
             $.ajax({
                 type: "GET",
-                url: "/api",
+                url: "/api/list",
                 data: {},
                 success: function (response) {
                     let todo_list = response['todo_list'];
@@ -64,24 +62,31 @@
         function memo() {
             // 메모하기 API 연결
             let submitMemo = $('#submit-memo').val();
-            
-            if (confirm("등록하실건가요?")==true){
+            let checkMemo = submitMemo.replace(/\s | gi, ""/);
+            let trimMemo = submitMemo.trim();
 
-            $.ajax({
-                type: "POST",
-                url: "/api",
-                data: {
-                    memo_give: submitMemo,
-                },
-                success: function (response) { // 성공하면
-                    alert(response["msg"]);
-                }
-            })
-
+            if(checkMemo.length == 0 | trimMemo.length == 0) {
+                alert("내용을 입력하세요!")
             }else {
-                return
+               
+                if (confirm("등록하실건가요?") ==true){
+
+                $.ajax({
+                    type: "POST",
+                    url: "/api/write",
+                    data: {
+                        memo_give: submitMemo,
+                    },
+                    success: function (response) { // 성공하면
+                        alert(response["msg"]);
+                    }
+                })
+
+                }else {
+                    return
+                }
             }
-           
+
         }
 
     </script>

@@ -7,7 +7,7 @@ from pymongo import MongoClient
 import datetime
 
 client = MongoClient('mongodb://test:test@localhost', 27017)
-# client = MongoClient('localhost', 27017)
+#client = MongoClient('localhost', 27017)
 db = client.dbhomework
 
 
@@ -18,7 +18,7 @@ def homework():
 
 
 # 메모하기(POST) API
-@app.route('/api', methods=['POST'])
+@app.route('/api/write', methods=['POST'])
 def save_memo():
     memo_receive = request.form['memo_give']
     date = datetime.datetime.now()
@@ -32,7 +32,7 @@ def save_memo():
     return jsonify({'msg': '완료되었습니다!'})
 
 # 목록보기(Read) API
-@app.route('/api', methods=['GET'])
+@app.route('/api/list', methods=['GET'])
 def view_memos():
     todo_list = list(db.memoList.find({}, {'_id': False}))
 
