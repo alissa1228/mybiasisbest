@@ -32,7 +32,7 @@ def save_memo():
     return jsonify({'msg': '완료되었습니다!'})
 
 # 목록보기(Read) API
-@app.route('/api/list', methods=['GET'])
+@app.route('/api', methods=['GET'])
 def view_memos():
     todo_list = list(db.memoList.find({}, {'_id': False}))
 
